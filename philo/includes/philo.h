@@ -42,6 +42,8 @@ int         validate_number(char **argv, int i);
 int	        check_params(int argc, char **argv);
 void	    parse_args(t_philo_info *info, int argc, char **argv);
 
+//init Philo and Forks
+void    	init_philo_n_Fork(t_philo_info *info);
 
 //error
 int         print_error(char *msg);

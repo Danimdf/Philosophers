@@ -6,7 +6,7 @@
 /*   By: Dmonteir < dmonteir@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 00:31:24 by Dmonteir          #+#    #+#             */
-/*   Updated: 2022/08/10 02:24:42 by Dmonteir         ###   ########.fr       */
+/*   Updated: 2022/08/11 01:48:50 by Dmonteir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int main(int argc, char **argv)
 	check_params(argc, argv);
 	parse_args(&info, argc, argv);
     
-    init_philo (&info);
+    init_Philo_n_Fork (&info);
 
 
     // teste minimo ./philo 2 1 1 1
@@ -34,12 +34,12 @@ int main(int argc, char **argv)
     return (0);
 }
 
-void    init_philo(t_philo_info *info)
+void    init_philo_n_Fork(t_philo_info *info)
 {
     int i;
     
     i = 0;
-    pthread_mutex_init(&info->main_mutex);
+    //pthread_mutex_init(&info->main_mutex);
     info->forks = ft_calloc(info->num_philos, sizeof(pthread_mutex_t));
     info->philos = ft_calloc(info->num_philos, sizeof(t_philo));
     while(i < info->num_philos)
@@ -47,16 +47,14 @@ void    init_philo(t_philo_info *info)
         info->philo->id = i + 1;
         info->philo->n_eat = 0;
         info->philo->l_fork = i;
-        info->philo->r_fork = i + 1;
         if (i == info->num_philos - 1)
             info->philo->r_fork = 0;
+        else
+            info->philo->r_fork = i + 1;
         info->philo->timestamp = get_t_stamp();
-        //pthread_mutex_init(&info->forks[i], NULL);
-        //info->philo->thread = pthread_create();
-        //pthread_mutex_init(&info->philo[i]->mutex, NULL);
-
-        // Verificar se devemos abrir um mutex para cada filosofo 
-        // e para cada garfo
+        info->philo->thread = pthread_create();
+        pthread_mutex_init(&info->forks[i], NULL);
+        //Nos ja temos um mutex para cada philo, pois o garfo é a analogia do mutex
 
         i++;
     }
@@ -68,6 +66,6 @@ static long int	get_t_stamp(void)
 	long int		ms;
 
 	gettimeofday(&tv, NULL);
-	ms = tv.tv_sec * 1000 + tv.tv_usec / 1000;
+	ms = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
 	return (ms);
 }
