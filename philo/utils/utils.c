@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jfrancis <jfrancis@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: Dmonteir < dmonteir@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 20:01:53 by jfrancis          #+#    #+#             */
-/*   Updated: 2022/08/11 20:39:10 by jfrancis         ###   ########.fr       */
+/*   Updated: 2022/08/13 00:55:32 by Dmonteir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/philo.h"
+#include "../includes/philo.h"
 
 int	ft_atoi(const char *nptr)
 {
@@ -60,12 +60,12 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	return (ptr);
 }
 
-int	get_t_stamp(void)
+long int	get_t_stamp(void)
 {
 	struct timeval	tv;
-	int		ms;
+	long int		ms;
 
 	gettimeofday(&tv, NULL);
-	ms = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
+	ms = tv.tv_sec * 1000 + tv.tv_usec / 1000;
 	return (ms);
 }
