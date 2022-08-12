@@ -1,11 +1,14 @@
 NAME	= philo
-CC		= clang
+CC		= gcc
 CFLAGS	= -Wall -Werror -Wextra -pthread -g
 
 SRC =	main.c \
 		error.c \
 		check_params.c \
 		parser.c \
+		init.c \
+		utils.c \
+		utils_check.c
 
 
 OBJTS	= $(SRC:.c=.o)

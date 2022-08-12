@@ -19,34 +19,50 @@ typedef struct s_philo
 	int				r_fork;
 	long int		timestamp;
 	pthread_t		thread;
-	pthread_mutex_t	mutex;
+	pthread_mutex_t	fork;
+	pthread_mutex_t	*neighbours_fork;
 }	t_philo;
 
 typedef struct s_philo_info
 {
-    long int				num_philos;
-	long int				ms_to_die;
-	long int				ms_to_eat;
-	long int				ms_to_sleep;
-	long int				num_meals;
-	t_philo					*philo;
-	pthread_mutex_t			*forks;
-	pthread_mutex_t			main_mutex;
+	int					num_philos;
+	int					ms_to_die;
+	int					ms_to_eat;
+	int					ms_to_sleep;
+	int					num_meals;
+	t_philo				*philo;
+	pthread_mutex_t		main_mutex;
 } t_philo_info;
 
 
-//check_params
-long int	ft_atol(const char *nptr);
-size_t	    ft_strlen(const char *s);
-int         validate_number(char **argv, int i);
-int	        check_params(int argc, char **argv);
-void	    parse_args(t_philo_info *info, int argc, char **argv);
+//parser
+void		parse_args(t_philo_info *info, int argc, char **argv);
 
-//init Philo and Forks
-void    	init_philo_n_Fork(t_philo_info *info);
+//check_params
+int			check_params(int argc, char **argv);
+
+// utils_check
+int			ft_isdigit(int c);
+long int	ft_atol(const char *nptr);
+size_t		ft_strlen(const char *s);
+int			validate_number(char **argv, int i);
+
+// utils
+int			ft_atoi(const char *nptr);
+void		*ft_memset(void *b, int c, size_t n);
+void		*ft_calloc(size_t nmemb, size_t size);
+int			get_t_stamp(void);
+
+//init
+void		init_all(t_philo_info *info);
+void		init_philo(t_philo_info *info);
+void		init_forks(t_philo_info *info);
+void		*actions(void *args);
+void		create_threads(t_philo_info *info);
+void		join_threads(t_philo_info *info);
 
 //error
-int         print_error(char *msg);
+int			print_error(char *msg);
 
 
 #endif
