@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_params.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jfrancis <jfrancis@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 00:31:49 by Dmonteir          #+#    #+#             */
-/*   Updated: 2022/08/11 20:39:18 by jfrancis         ###   ########.fr       */
+/*   Updated: 2022/08/13 15:18:59 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ int	check_params(int argc, char **argv)
 			return (print_error("All arguments must be numbers"));
 		i++;
 	}
-	return (0);
+	return (TRUE);
 }
