@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Dmonteir < dmonteir@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 00:45:39 by Dmonteir          #+#    #+#             */
-/*   Updated: 2022/08/13 01:30:10 by Dmonteir         ###   ########.fr       */
+/*   Updated: 2022/08/13 12:55:49 by gusalves         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	parse_args(t_philo_info *info, int argc, char **argv)
 {
-	info->timestamp = get_t_stamp();
+	info->control = 1;
+	info->pgm_start = get_t_stamp();
 	info->num_philos = ft_atoi(argv[1]);
 	info->ms_to_die = ft_atoi(argv[2]);
 	info->ms_to_eat = ft_atoi(argv[3]);

@@ -8,7 +8,8 @@ SRC =	main.c \
 		parser.c \
 		init.c \
 		utils.c \
-		utils_check.c
+		utils_check.c \
+		philo_actions.c
 
 
 OBJTS	= $(SRC:.c=.o)

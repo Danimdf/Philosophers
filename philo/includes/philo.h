@@ -10,6 +10,8 @@
 
 # define MAX_INT 2147483647
 # define MIN_INT -2147483648
+# define TRUE 1
+# define FALSE 0
 
 typedef struct s_philo_info t_philo_info;
 typedef struct s_philo
@@ -18,21 +20,24 @@ typedef struct s_philo
 	int				n_eat;
 	int				l_fork;
 	int				r_fork;
+	int				last_meal;
 	t_philo_info	*philo_info;
 	pthread_t		thread;
+	pthread_mutex_t	sleep_mutex;
 	pthread_mutex_t	fork;
 	pthread_mutex_t	*neighbours_fork;
 }	t_philo;
 
 typedef struct s_philo_info
 {
+	int					control;
 	int					num_philos;
 	int					ms_to_die;
 	int					ms_to_eat;
 	int					ms_to_sleep;
 	int					num_meals;
 	t_philo				*philo;
-	long int			timestamp;
+	long int			pgm_start;
 	pthread_mutex_t		main_mutex;
 } t_philo_info;
 
@@ -54,14 +59,19 @@ int			ft_atoi(const char *nptr);
 void		*ft_memset(void *b, int c, size_t n);
 void		*ft_calloc(size_t nmemb, size_t size);
 long int			get_t_stamp(void);
+long int	get_current_time(t_philo *philo);
 
 //init
 void		init_all(t_philo_info *info);
 void		init_philo(t_philo_info *info);
 void		init_forks(t_philo_info *info);
-void		*actions(void *args);
+
+//philo_actions
 void		create_threads(t_philo_info *info);
 void		join_threads(t_philo_info *info);
+void		*actions(void *args);
+int			is_alive(t_philo *philo);
+int	has_enough_time(t_philo *philo, int action);
 
 //error
 int			print_error(char *msg);
