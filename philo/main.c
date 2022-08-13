@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 00:31:24 by Dmonteir          #+#    #+#             */
-/*   Updated: 2022/08/13 15:18:59 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/08/13 17:28:58 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,6 @@ int	main(int argc, char **argv)
 	init_all(&info);
 	create_threads(&info);
 	join_threads(&info);
-	// teste minimo ./philo 2 1 1 1
-	// saber a hora que o philo tem que pegar os garfos e comer
-	// tempo de dormir
-	// soltar os garfos
-	// e se não comer é hora de morrer
+	free_all(&info);
 	return (0);
 }

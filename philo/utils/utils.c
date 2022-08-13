@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 20:01:53 by jfrancis          #+#    #+#             */
-/*   Updated: 2022/08/13 11:53:49 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/08/13 16:29:04 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,10 @@ long int	get_t_stamp(void)
 	return (ms);
 }
 
-long int get_current_time(t_philo *philo)
+long int	get_current_time(long int ts_baseline)
 {
 	long int time_now;
 
-	time_now = get_t_stamp() - philo->philo_info->pgm_start;
+	time_now = get_t_stamp() - ts_baseline;
 	return time_now;
 }

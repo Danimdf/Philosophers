@@ -20,10 +20,9 @@ typedef struct s_philo
 	int				n_eat;
 	int				l_fork;
 	int				r_fork;
-	int				last_meal;
+	long int		last_meal;
 	t_philo_info	*philo_info;
 	pthread_t		thread;
-	pthread_mutex_t	sleep_mutex;
 	pthread_mutex_t	fork;
 	pthread_mutex_t	*neighbours_fork;
 }	t_philo;
@@ -38,7 +37,6 @@ typedef struct s_philo_info
 	int					num_meals;
 	t_philo				*philo;
 	long int			pgm_start;
-	pthread_mutex_t		main_mutex;
 } t_philo_info;
 
 
@@ -47,6 +45,9 @@ void		parse_args(t_philo_info *info, int argc, char **argv);
 
 //check_params
 int			check_params(int argc, char **argv);
+
+// free_all.c
+void		free_all(t_philo_info *info);
 
 // utils_check
 int			ft_isdigit(int c);
@@ -58,8 +59,8 @@ int			validate_number(char **argv, int i);
 int			ft_atoi(const char *nptr);
 void		*ft_memset(void *b, int c, size_t n);
 void		*ft_calloc(size_t nmemb, size_t size);
-long int			get_t_stamp(void);
-long int	get_current_time(t_philo *philo);
+long int	get_t_stamp(void);
+long int	get_current_time(long int ts_baseline);
 
 //init
 void		init_all(t_philo_info *info);
@@ -71,7 +72,7 @@ void		create_threads(t_philo_info *info);
 void		join_threads(t_philo_info *info);
 void		*actions(void *args);
 int			is_alive(t_philo *philo);
-int	has_enough_time(t_philo *philo, int action);
+int			has_enough_time(t_philo *philo, int action);
 
 //error
 int			print_error(char *msg);
