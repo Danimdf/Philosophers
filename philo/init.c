@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gusalves <gusalves@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 20:27:13 by jfrancis          #+#    #+#             */
-/*   Updated: 2022/08/13 13:15:53 by gusalves         ###   ########.fr       */
+/*   Updated: 2022/08/13 15:21:05 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void init_forks(t_philo_info *info)
 
 void	init_all(t_philo_info *info)
 {
-
+	info->control = 1;
+	info->pgm_start = get_t_stamp();
 	init_philo(info);
 	init_forks(info);
 }
