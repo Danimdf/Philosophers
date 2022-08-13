@@ -39,7 +39,7 @@ static void	eat(t_philo *philo)
 		pthread_mutex_unlock(philo->neighbours_fork);
 		return ;
 	}
-	printf("%li %i has taken a neighbours_fork.\n", get_current_time(philo->philo_info->pgm_start), philo->id);
+	printf("%li %i has taken a fork.\n", get_current_time(philo->philo_info->pgm_start), philo->id);
 	philo->last_meal = get_t_stamp();
 	printf("%li %i is eating.\n", get_current_time(philo->philo_info->pgm_start), philo->id);
 	if (philo->philo_info->ms_to_eat > philo->philo_info->ms_to_die)

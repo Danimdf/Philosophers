@@ -18,8 +18,6 @@ typedef struct s_philo
 {
 	int				id;
 	int				n_eat;
-	int				l_fork;
-	int				r_fork;
 	long int		last_meal;
 	t_philo_info	*philo_info;
 	pthread_t		thread;
@@ -37,7 +35,7 @@ typedef struct s_philo_info
 	int					num_meals;
 	t_philo				*philo;
 	long int			pgm_start;
-} t_philo_info;
+}	t_philo_info;
 
 
 //parser
