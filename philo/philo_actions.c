@@ -3,42 +3,56 @@
 static void	think(t_philo *philo)
 {
 	printf("%li %i is thinking.\n", get_current_time(philo), philo->id);
+	return ;
 }
 
-static int	doze_off(t_philo *philo)
+static void	doze_off(t_philo *philo)
 {
-	// pthread_mutex_lock(&philo->sleep_mutex);
 	printf("%li %i is sleeping.\n", get_current_time(philo), philo->id);
-	if (has_enough_time(philo, philo->philo_info->ms_to_sleep))
+	if (!has_enough_time(philo, philo->philo_info->ms_to_sleep))
 	{
 		usleep((philo->philo_info->ms_to_die - (get_t_stamp() - philo->last_meal)) * 1000);
-		printf("%li %i died.\n", get_current_time(philo), philo->id);
+		philo->philo_info->control = FALSE;
+		printf("%li %i died while sleeping.\n", get_current_time(philo), philo->id);
+		return ;
 	}
 	else
 	{
 		usleep(philo->philo_info->ms_to_sleep * 1000);
 		printf("%li %i end sleeping.\n", get_current_time(philo), philo->id);
 	}
-	return (TRUE);
-	// pthread_mutex_unlock(&philo->sleep_mutex);
+	return ;
 }
 
-static int	eat(t_philo *philo)
+static void	eat(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->fork);
 	if (!is_alive(philo))
-		return (FALSE);
+	{
+		philo->philo_info->control = FALSE;
+		pthread_mutex_unlock(&philo->fork);
+		return ;
+	}
 	printf("%li %i has taken a fork.\n", get_current_time(philo), philo->id);
 	pthread_mutex_lock(philo->neighbours_fork);
 	if (!is_alive(philo))
-		return (FALSE);
+	{
+		philo->philo_info->control = FALSE;
+		pthread_mutex_unlock(&philo->fork);
+		pthread_mutex_unlock(philo->neighbours_fork);
+		return ;
+	}
 	printf("%li %i has taken a neighbours_fork.\n", get_current_time(philo), philo->id);
 	philo->last_meal = get_t_stamp();
 	printf("%li %i is eating.\n", get_current_time(philo), philo->id);
-	if (!has_enough_time(philo, philo->philo_info->ms_to_eat))
+	if (philo->philo_info->ms_to_eat > philo->philo_info->ms_to_die)
 	{
+		usleep((philo->philo_info->ms_to_eat > philo->philo_info->ms_to_die) * 1000);
 		philo->philo_info->control = FALSE;
-		return (FALSE);
+		printf("%li %i died while eating.\n", get_current_time(philo), philo->id);
+		pthread_mutex_unlock(&philo->fork);
+		pthread_mutex_unlock(philo->neighbours_fork);
+		return ;
 	}
 	usleep(philo->philo_info->ms_to_eat * 1000);
 	philo->n_eat++;
@@ -47,7 +61,7 @@ static int	eat(t_philo *philo)
 	pthread_mutex_unlock(philo->neighbours_fork);
 	printf("%li %i has put a neighbours_fork.\n", get_current_time(philo), philo->id);
 	philo->philo_info->control = TRUE;
-	return (TRUE);
+	return ;
 }
 
 int	is_alive(t_philo *philo)
@@ -66,30 +80,23 @@ int	has_enough_time(t_philo *philo, int action)
 		return (FALSE);
 }
 
-void	philo_dies(t_philo *philo)
-{
-	printf("%li %i died.\n", get_current_time(philo), philo->id);
-}
-
 void	*actions(void *args)
 {
 	t_philo	*philo;
-	philo = (t_philo *)args;
 
+	philo = (t_philo *)args;
 	if (philo->id % 2 == 0)
 		usleep(500);
 	while (philo->philo_info->control)
 	{
-		philo->philo_info->control = eat(philo);
+		eat(philo);
 		if(!philo->philo_info->control)
 			break ;
-		philo->philo_info->control = doze_off(philo);
+		doze_off(philo);
 		if(!philo->philo_info->control)
 			break ;
 		think(philo);
 	}
-	if(!philo->philo_info->control)
-		philo_dies(philo);
 	return (0);
 }
 
