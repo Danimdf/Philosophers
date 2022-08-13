@@ -36,8 +36,6 @@ $(LIBFT):
 
 clean:
 		$(RM) $(OBJ)
-		$(RM) $(OBJ_TESTS)
-
 
 fclean:	clean
 		$(RM) $(NAME)
