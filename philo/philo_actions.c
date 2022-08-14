@@ -1,5 +1,7 @@
 #include "includes/philo.h"
 
+static void	*one_philo(t_philo *philo);
+
 static void	think(t_philo *philo)
 {
 	printf("%li %i is thinking.\n", get_current_time(philo->philo_info->pgm_start), philo->id);
@@ -44,7 +46,7 @@ static void	eat(t_philo *philo)
 	printf("%li %i is eating.\n", get_current_time(philo->philo_info->pgm_start), philo->id);
 	if (philo->philo_info->ms_to_eat > philo->philo_info->ms_to_die)
 	{
-		usleep((philo->philo_info->ms_to_eat > philo->philo_info->ms_to_die) * 1000);
+		usleep(philo->philo_info->ms_to_die * 1000);
 		philo->philo_info->control = FALSE;
 		printf("%li %i died.\n", get_current_time(philo->philo_info->pgm_start), philo->id);
 		pthread_mutex_unlock(&philo->fork);
@@ -80,6 +82,8 @@ void	*actions(void *args)
 	t_philo	*philo;
 
 	philo = (t_philo *)args;
+	if(philo->philo_info->num_philos == 1)
+		return (one_philo(philo));
 	if (philo->id % 2 == 0)
 		usleep(500);
 	while (philo->philo_info->control && philo->n_eat < philo->philo_info->num_meals)
@@ -95,6 +99,15 @@ void	*actions(void *args)
 	return (0);
 }
 
+static void	*one_philo(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->fork);
+	printf("%li %i has taken a fork.\n", get_current_time(philo->philo_info->pgm_start), philo->id);
+	usleep( philo->philo_info->ms_to_die * 1000);
+	printf("%li %i died.\n", get_current_time(philo->philo_info->pgm_start), philo->id);
+	pthread_mutex_unlock(&philo->fork);
+	return NULL;
+}
 void	create_threads(t_philo_info *info)
 {
 	int i;
