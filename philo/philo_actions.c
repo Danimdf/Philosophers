@@ -82,7 +82,7 @@ void	*actions(void *args)
 	philo = (t_philo *)args;
 	if (philo->id % 2 == 0)
 		usleep(500);
-	while (philo->philo_info->control)
+	while (philo->philo_info->control && philo->n_eat < philo->philo_info->num_meals)
 	{
 		eat(philo);
 		if(!philo->philo_info->control)
