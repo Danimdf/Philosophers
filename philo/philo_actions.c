@@ -9,13 +9,25 @@ static void	think(t_philo *philo)
 	return ;
 }
 
+static int read_control(t_philo *philo)
+{
+	int control;
+
+	pthread_mutex_lock(&philo->philo_info->mutex_control);
+	control = philo->philo_info->control;
+	pthread_mutex_unlock(&philo->philo_info->mutex_control);
+	return (control);
+}
+
 static void	doze_off(t_philo *philo)
 {
 	print_action(philo, SLEEP);
 	if (!has_enough_time(philo, philo->philo_info->ms_to_sleep))
 	{
 		usleep((philo->philo_info->ms_to_die - (get_t_stamp() - philo->last_meal)) * 1000);
+		// pthread_mutex_lock(&philo->philo_info->mutex_control);
 		philo->philo_info->control = FALSE;
+		// pthread_mutex_unlock(&philo->philo_info->mutex_control);
 		print_action(philo, DIE);
 		return ;
 	}
@@ -43,33 +55,34 @@ static void    print_action(t_philo *philo, char *action)
     pthread_mutex_unlock(&philo->philo_info->print_out);
 }
 static void	eat(t_philo *philo)
-{	
+{
 	pthread_mutex_lock(&philo->fork);
-	pthread_mutex_lock(&philo->philo_info->mutex_control);
-	if (!is_alive(philo) || !philo->philo_info->control)
+	if (!is_alive(philo) || !read_control(philo))
 	{
 		philo->philo_info->control = FALSE;
-		pthread_mutex_unlock(&philo->philo_info->mutex_control);
 		pthread_mutex_unlock(&philo->fork);
 		return ;
 	}
-	pthread_mutex_unlock(&philo->philo_info->mutex_control);
 	print_action(philo, FORK);
 	pthread_mutex_lock(philo->neighbours_fork);
-	if (!is_alive(philo) || !philo->philo_info->control)
+
+	if (!is_alive(philo) || !read_control(philo))
 	{
 		philo->philo_info->control = FALSE;
 		pthread_mutex_unlock(&philo->fork);
 		pthread_mutex_unlock(philo->neighbours_fork);
 		return ;
 	}
+
 	print_action(philo, FORK);
 	philo->last_meal = get_t_stamp();
 	print_action(philo, EAT);
 	if (philo->philo_info->ms_to_eat > philo->philo_info->ms_to_die)
 	{
 		usleep(philo->philo_info->ms_to_die * 1000);
+		pthread_mutex_lock(&philo->philo_info->mutex_control);
 		philo->philo_info->control = FALSE;
+		pthread_mutex_unlock(&philo->philo_info->mutex_control);
 		print_action(philo, DIE);
 		pthread_mutex_unlock(&philo->fork);
 		pthread_mutex_unlock(philo->neighbours_fork);
@@ -79,7 +92,7 @@ static void	eat(t_philo *philo)
 	philo->n_eat++;
 	pthread_mutex_unlock(&philo->fork);
 	pthread_mutex_unlock(philo->neighbours_fork);
-	
+
 	pthread_mutex_lock(&philo->philo_info->mutex_control);
 	philo->philo_info->control = TRUE;
 	pthread_mutex_unlock(&philo->philo_info->mutex_control);
@@ -110,23 +123,19 @@ void	*actions(void *args)
 	if(philo->philo_info->num_philos == 1)
 		return (one_philo(philo));
 	if (philo->id % 2 == 0)
-		usleep(500);
-	
-	pthread_mutex_lock(&philo->philo_info->mutex_control);	
-	while (philo->philo_info->control && philo->n_eat < philo->philo_info->num_meals)
+		usleep(5000);
+
+	while (read_control(philo) && philo->n_eat < philo->philo_info->num_meals)
 	{
-		pthread_mutex_unlock(&philo->philo_info->mutex_control);
 		eat(philo);
-		if(!philo->philo_info->control)
+		if(!read_control(philo))
 			break ;
 		doze_off(philo);
-		if(!philo->philo_info->control)
+		if(!read_control(philo))
 			break ;
 		think(philo);
-		pthread_mutex_lock(&philo->philo_info->mutex_control);	
 	}
-	pthread_mutex_unlock(&philo->philo_info->mutex_control);
-	
+
 	return (0);
 }
 
