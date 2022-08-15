@@ -12,6 +12,13 @@
 # define MIN_INT -2147483648
 # define TRUE 1
 # define FALSE 0
+# define DIE "died"
+# define EAT "is eating"
+# define SLEEP "is sleeping"
+# define THINK "is thinking"
+# define FORK "has taken a fork"
+
+
 
 typedef struct s_philo_info t_philo_info;
 typedef struct s_philo
@@ -21,6 +28,7 @@ typedef struct s_philo
 	long int		last_meal;
 	t_philo_info	*philo_info;
 	pthread_t		thread;
+	long int		pgm_start;
 	pthread_mutex_t	fork;
 	pthread_mutex_t	*neighbours_fork;
 }	t_philo;
@@ -34,7 +42,8 @@ typedef struct s_philo_info
 	int					ms_to_sleep;
 	int					num_meals;
 	t_philo				*philo;
-	long int			pgm_start;
+	pthread_mutex_t		mutex_control;
+	pthread_mutex_t		print_out;
 }	t_philo_info;
 
 
@@ -52,6 +61,7 @@ int			ft_isdigit(int c);
 long int	ft_atol(const char *nptr);
 size_t		ft_strlen(const char *s);
 int			validate_number(char **argv, int i);
+int    		ft_strcmp(const char *s1, const char *s2);
 
 // utils
 int			ft_atoi(const char *nptr);
