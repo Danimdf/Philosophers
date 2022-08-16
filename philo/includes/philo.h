@@ -31,11 +31,14 @@ typedef struct s_philo
 	long int		pgm_start;
 	pthread_mutex_t	fork;
 	pthread_mutex_t	*neighbours_fork;
+	pthread_mutex_t	*first_fork;
+	pthread_mutex_t	*second_fork;
 }	t_philo;
 
 typedef struct s_philo_info
 {
 	int					control;
+	int					first_to_die;
 	int					num_philos;
 	int					ms_to_die;
 	int					ms_to_eat;
@@ -43,6 +46,7 @@ typedef struct s_philo_info
 	int					num_meals;
 	t_philo				*philo;
 	pthread_mutex_t		mutex_control;
+	pthread_mutex_t		mutex_first_to_die;
 	pthread_mutex_t		print_out;
 }	t_philo_info;
 

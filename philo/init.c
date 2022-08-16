@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Dmonteir < dmonteir@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 20:27:13 by jfrancis          #+#    #+#             */
-/*   Updated: 2022/08/15 02:17:21 by Dmonteir         ###   ########.fr       */
+/*   Updated: 2022/08/16 20:31:23 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,22 @@ void init_forks(t_philo_info *info)
 	i = 0;
 	
 	pthread_mutex_init(&info->mutex_control, NULL);
+	pthread_mutex_init(&info->mutex_first_to_die, NULL);
 	pthread_mutex_init(&info->print_out, NULL);
 	while(i < info->num_philos)
 	{
 		pthread_mutex_init(&(info->philo)[i].fork, NULL);
 		(info->philo)[i].neighbours_fork = &((info->philo)[(i + 1) % info->num_philos].fork);
+		if ((info->philo)[i].id % 2)
+		{
+			(info->philo)[i].first_fork = (info->philo)[i].neighbours_fork;
+			(info->philo)[i].second_fork = &(info->philo)[i].fork;
+		}
+		else
+		{
+			(info->philo)[i].first_fork = &(info->philo)[i].fork;
+			(info->philo)[i].second_fork = (info->philo)[i].neighbours_fork;
+		}
 		i++;
 	}
 }
@@ -48,6 +59,7 @@ void init_forks(t_philo_info *info)
 void	init_all(t_philo_info *info)
 {
 	info->control = 1;
+	info->first_to_die = 0;
 	init_philo(info);
 	init_forks(info);
 }
