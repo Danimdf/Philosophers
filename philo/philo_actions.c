@@ -19,15 +19,20 @@ static int read_control(t_philo *philo)
 	return (control);
 }
 
+static void write_control(t_philo *philo, int status)
+{
+	pthread_mutex_lock(&philo->philo_info->mutex_control);
+	philo->philo_info->control = status;
+	pthread_mutex_unlock(&philo->philo_info->mutex_control);
+}
+
 static void	doze_off(t_philo *philo)
 {
 	print_action(philo, SLEEP);
 	if (!has_enough_time(philo, philo->philo_info->ms_to_sleep))
 	{
 		usleep((philo->philo_info->ms_to_die - (get_t_stamp() - philo->last_meal)) * 1000);
-		// pthread_mutex_lock(&philo->philo_info->mutex_control);
-		philo->philo_info->control = FALSE;
-		// pthread_mutex_unlock(&philo->philo_info->mutex_control);
+		write_control(philo, FALSE);
 		print_action(philo, DIE);
 		return ;
 	}
@@ -59,7 +64,7 @@ static void	eat(t_philo *philo)
 	pthread_mutex_lock(&philo->fork);
 	if (!is_alive(philo) || !read_control(philo))
 	{
-		philo->philo_info->control = FALSE;
+		write_control(philo, FALSE);
 		pthread_mutex_unlock(&philo->fork);
 		return ;
 	}
@@ -68,7 +73,7 @@ static void	eat(t_philo *philo)
 
 	if (!is_alive(philo) || !read_control(philo))
 	{
-		philo->philo_info->control = FALSE;
+		write_control(philo, FALSE);
 		pthread_mutex_unlock(&philo->fork);
 		pthread_mutex_unlock(philo->neighbours_fork);
 		return ;
@@ -80,9 +85,7 @@ static void	eat(t_philo *philo)
 	if (philo->philo_info->ms_to_eat > philo->philo_info->ms_to_die)
 	{
 		usleep(philo->philo_info->ms_to_die * 1000);
-		pthread_mutex_lock(&philo->philo_info->mutex_control);
-		philo->philo_info->control = FALSE;
-		pthread_mutex_unlock(&philo->philo_info->mutex_control);
+		write_control(philo, FALSE);
 		print_action(philo, DIE);
 		pthread_mutex_unlock(&philo->fork);
 		pthread_mutex_unlock(philo->neighbours_fork);
@@ -93,9 +96,9 @@ static void	eat(t_philo *philo)
 	pthread_mutex_unlock(&philo->fork);
 	pthread_mutex_unlock(philo->neighbours_fork);
 
-	pthread_mutex_lock(&philo->philo_info->mutex_control);
+	/* pthread_mutex_lock(&philo->philo_info->mutex_control);
 	philo->philo_info->control = TRUE;
-	pthread_mutex_unlock(&philo->philo_info->mutex_control);
+	pthread_mutex_unlock(&philo->philo_info->mutex_control); */
 	return ;
 }
 
