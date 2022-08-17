@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 21:08:49 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/08/16 21:29:33 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/08/16 21:39:10 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	doze_off(t_philo *philo)
 	{
 		cal = philo->philo_info->ms_to_die - (get_t_stamp() - philo->last_meal);
 		usleep(cal * 1000);
-		write_control(philo, FALSE);
+		write_var(&philo->philo_info->control, &philo->philo_info->mutex_control, FALSE);
 		print_action(philo, DIE);
 		return ;
 	}
@@ -42,7 +42,7 @@ static void	eat(t_philo *philo)
 	pthread_mutex_lock(philo->first_fork);
 	if (!is_alive(philo) || !read_var(&philo->philo_info->control, &philo->philo_info->mutex_control))
 	{
-		write_control(philo, FALSE);
+		write_var(&philo->philo_info->control, &philo->philo_info->mutex_control, FALSE);
 		pthread_mutex_unlock(philo->first_fork);
 		return ;
 	}
@@ -50,7 +50,7 @@ static void	eat(t_philo *philo)
 	pthread_mutex_lock(philo->second_fork);
 	if (!is_alive(philo) || !read_var(&philo->philo_info->control, &philo->philo_info->mutex_control))
 	{
-		write_control(philo, FALSE);
+		write_var(&philo->philo_info->control, &philo->philo_info->mutex_control, FALSE);
 		pthread_mutex_unlock(philo->first_fork);
 		pthread_mutex_unlock(philo->second_fork);
 		return ;
@@ -61,7 +61,7 @@ static void	eat(t_philo *philo)
 	if (philo->philo_info->ms_to_eat > philo->philo_info->ms_to_die)
 	{
 		usleep(philo->philo_info->ms_to_die * 1000);
-		write_control(philo, FALSE);
+		write_var(&philo->philo_info->control, &philo->philo_info->mutex_control, FALSE);
 		print_action(philo, DIE);
 		pthread_mutex_unlock(philo->first_fork);
 		pthread_mutex_unlock(philo->second_fork);

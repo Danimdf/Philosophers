@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 21:17:27 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/08/16 21:29:33 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/08/16 21:37:43 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	print_action(t_philo *philo, char *action)
 		printf("%s%ld %i %s%s\n", BLU, t, philo->id, SLEEP, RESET);
 	if (ft_strcmp(action, DIE) == 0 && read_var(&philo->philo_info->first_to_die, &philo->philo_info->mutex_first_to_die) == 0)
 	{
-		write_first_to_die(philo, 1);
+		write_var(&philo->philo_info->first_to_die, &philo->philo_info->mutex_first_to_die, 1);
 		printf("%s%ld %i %s%s\n", RED, t, philo->id, DIE, RESET);
 	}
 	pthread_mutex_unlock(&philo->philo_info->print_out);
