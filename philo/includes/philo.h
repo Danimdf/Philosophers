@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: Dmonteir < dmonteir@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 21:13:52 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/08/16 21:39:46 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/08/18 00:40:42 by Dmonteir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ int			read_var(int *var, pthread_mutex_t *mutex);
 void		write_var(int *var, pthread_mutex_t *mutex, int status);
 void		create_threads(t_philo_info *info);
 void		join_threads(t_philo_info *info);
+void		philo_die_in_lunch(t_philo *philo);
+void		release_forks(t_philo *philo);
 
 //init
 void		init_all(t_philo_info *info);

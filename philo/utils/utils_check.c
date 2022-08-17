@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: Dmonteir < dmonteir@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 21:15:09 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/08/16 21:15:41 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/08/18 00:25:23 by Dmonteir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	validate_number(char **argv, int i)
 	index = 0;
 	arg_size = ft_strlen(argv[i]);
 	if (argv[i][index] == '-')
-		index++;
+		return (1);
 	while (index < arg_size)
 	{
 		if (!ft_isdigit(argv[i][index]))
