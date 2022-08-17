@@ -3,6 +3,32 @@ Eat, Sleep, Spaghetti, repeat. This project is about learning how threads work b
 
 
 
+        
+# Usage
+
+- Clone the project in your environment
+~~~shell
+git clone git@github.com:Danimdf/Philosophers.git
+~~~
+- Run the project
+~~~shell
+make
+~~~~
+- And pass the following arguments to run the program
+~~~shell
+./philo <number_of_philosophers> <time_to_die> <time_to_eat> <time_to_sleep> [ <must_eat> ]
+~~~
+
+- number_of_philosophers -> the number of philosophers and forks.
+- time_to_die -> A philosopher dies if he doesn't start to eat time_to_die ms after the beginning of his last meal.
+- time_to_eat -> The time it takes for a philosopher to eat.
+- time_to_sleep -> The time it takes for a philosopher to sleep.
+- must_eat (optional) -> Maximum number of meals philosophers can have, just after everyone eats must_eat times the program ends. For example with ./philo 10 500 100 200 3.
+
+<p>If a number of meals is not specified the simulation stops at the death of any philosophers.</p>
+
+# Allowed Functions
+
 <table>
  <thead>
         <th>
@@ -53,5 +79,4 @@ Eat, Sleep, Spaghetti, repeat. This project is about learning how threads work b
             <td><a href="https://linux.die.net/man/3/pthread_mutex_unlock">pthread_mutex_unlock</a></td>
             <td>Unlock a mutex</td>
         </tr>
-        
-
+</tbody>
