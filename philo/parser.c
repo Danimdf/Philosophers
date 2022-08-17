@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Dmonteir < dmonteir@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 00:45:39 by Dmonteir          #+#    #+#             */
-/*   Updated: 2022/08/15 00:52:28 by Dmonteir         ###   ########.fr       */
+/*   Updated: 2022/08/16 21:04:18 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/philo.h"
+#include "philo.h"
 
 void	parse_args(t_philo_info *info, int argc, char **argv)
 {

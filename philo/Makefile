@@ -1,17 +1,20 @@
 NAME	= philo
 CC		= gcc
-CFLAGS	= -Wall -Werror -Wextra -pthread -g
+CFLAGS	= -Wall -Werror -Wextra -pthread -g -I includes/
 
 SRC =	main.c \
 		error.c \
 		check_params.c \
 		free_all.c \
+		one_philo.c \
 		parser.c \
 		init.c \
 		utils.c \
+		utils_actions.c \
 		utils_check.c \
+		utils_data_race.c \
+		utils_threads.c \
 		philo_actions.c
-
 
 OBJTS	= $(SRC:.c=.o)
 OBJ		= $(addprefix ./obj/, $(OBJTS))

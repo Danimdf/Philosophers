@@ -1,4 +1,16 @@
-#include "../includes/philo.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_check.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/16 21:15:09 by roaraujo          #+#    #+#             */
+/*   Updated: 2022/08/16 21:15:41 by roaraujo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "philo.h"
 
 int	ft_isdigit(int c)
 {
@@ -64,22 +76,22 @@ int	validate_number(char **argv, int i)
 	return (0);
 }
 
-int    ft_strcmp(const char *s1, const char *s2)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-    size_t            i;
-    unsigned char    *s_s1;
-    unsigned char    *s_s2;
+	size_t			i;
+	unsigned char	*s_s1;
+	unsigned char	*s_s2;
 
-    if (!s1 || !s2)
-        return (-1);
-    i = 0;
-    s_s1 = (unsigned char *)s1;
-    s_s2 = (unsigned char *)s2;
-    while (s_s1[i] || s_s2[i])
-    {
-        if (s_s1[i] != s_s2[i])
-            return (s_s1[i] - s_s2[i]);
-        i++;
-    }
-    return (0);
+	if (!s1 || !s2)
+		return (-1);
+	i = 0;
+	s_s1 = (unsigned char *)s1;
+	s_s2 = (unsigned char *)s2;
+	while (s_s1[i] || s_s2[i])
+	{
+		if (s_s1[i] != s_s2[i])
+			return (s_s1[i] - s_s2[i]);
+		i++;
+	}
+	return (0);
 }

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Dmonteir < dmonteir@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 20:01:53 by jfrancis          #+#    #+#             */
-/*   Updated: 2022/08/15 01:59:10 by Dmonteir         ###   ########.fr       */
+/*   Updated: 2022/08/16 21:18:19 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include "philo.h"
 
 int	ft_atoi(const char *nptr)
 {
@@ -72,8 +72,8 @@ long int	get_t_stamp(void)
 
 long int	get_current_time(long int ts_baseline)
 {
-	long int time_now;
+	long int	time_now;
 
 	time_now = get_t_stamp() - ts_baseline;
-	return time_now;
+	return (time_now);
 }

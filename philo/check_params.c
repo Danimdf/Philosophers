@@ -6,11 +6,11 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 00:31:49 by Dmonteir          #+#    #+#             */
-/*   Updated: 2022/08/13 15:18:59 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/08/16 21:03:26 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/philo.h"
+#include "philo.h"
 
 int	check_params(int argc, char **argv)
 {

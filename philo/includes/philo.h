@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/16 21:13:52 by roaraujo          #+#    #+#             */
+/*   Updated: 2022/08/16 21:14:44 by roaraujo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILO_H
 # define PHILO_H
 
@@ -18,9 +30,7 @@
 # define THINK "is thinking"
 # define FORK "has taken a fork"
 
-
-
-typedef struct s_philo_info t_philo_info;
+typedef struct s_philo_info	t_philo_info;
 typedef struct s_philo
 {
 	int				id;
@@ -50,7 +60,6 @@ typedef struct s_philo_info
 	pthread_mutex_t		print_out;
 }	t_philo_info;
 
-
 //parser
 void		parse_args(t_philo_info *info, int argc, char **argv);
 
@@ -65,7 +74,7 @@ int			ft_isdigit(int c);
 long int	ft_atol(const char *nptr);
 size_t		ft_strlen(const char *s);
 int			validate_number(char **argv, int i);
-int    		ft_strcmp(const char *s1, const char *s2);
+int			ft_strcmp(const char *s1, const char *s2);
 
 // utils
 int			ft_atoi(const char *nptr);
@@ -73,6 +82,12 @@ void		*ft_memset(void *b, int c, size_t n);
 void		*ft_calloc(size_t nmemb, size_t size);
 long int	get_t_stamp(void);
 long int	get_current_time(long int ts_baseline);
+int			read_control(t_philo *philo);
+void		write_control(t_philo *philo, int status);
+int			read_first_to_die(t_philo *philo);
+void		write_first_to_die(t_philo *philo, int value);
+void		create_threads(t_philo_info *info);
+void		join_threads(t_philo_info *info);
 
 //init
 void		init_all(t_philo_info *info);
@@ -80,14 +95,13 @@ void		init_philo(t_philo_info *info);
 void		init_forks(t_philo_info *info);
 
 //philo_actions
-void		create_threads(t_philo_info *info);
-void		join_threads(t_philo_info *info);
 void		*actions(void *args);
 int			is_alive(t_philo *philo);
 int			has_enough_time(t_philo *philo, int action);
+void		*one_philo(t_philo *philo);
+void		print_action(t_philo *philo, char *action);
 
 //error
 int			print_error(char *msg);
-
 
 #endif
