@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 21:08:49 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/08/16 21:10:30 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/08/16 21:29:33 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	doze_off(t_philo *philo)
 
 	print_action(philo, SLEEP);
 	if (!has_enough_time(philo, philo->philo_info->ms_to_sleep)
-		&& read_first_to_die(philo) != 1)
+		&& read_var(&philo->philo_info->first_to_die, &philo->philo_info->mutex_first_to_die) != 1)
 	{
 		cal = philo->philo_info->ms_to_die - (get_t_stamp() - philo->last_meal);
 		usleep(cal * 1000);
@@ -40,7 +40,7 @@ static void	doze_off(t_philo *philo)
 static void	eat(t_philo *philo)
 {
 	pthread_mutex_lock(philo->first_fork);
-	if (!is_alive(philo) || !read_control(philo))
+	if (!is_alive(philo) || !read_var(&philo->philo_info->control, &philo->philo_info->mutex_control))
 	{
 		write_control(philo, FALSE);
 		pthread_mutex_unlock(philo->first_fork);
@@ -48,7 +48,7 @@ static void	eat(t_philo *philo)
 	}
 	print_action(philo, FORK);
 	pthread_mutex_lock(philo->second_fork);
-	if (!is_alive(philo) || !read_control(philo))
+	if (!is_alive(philo) || !read_var(&philo->philo_info->control, &philo->philo_info->mutex_control))
 	{
 		write_control(philo, FALSE);
 		pthread_mutex_unlock(philo->first_fork);
@@ -81,15 +81,15 @@ void	*actions(void *args)
 	philo = (t_philo *)args;
 	if (philo->philo_info->num_philos == 1)
 		return (one_philo(philo));
-	while (read_control(philo) && philo->n_eat < philo->philo_info->num_meals)
+	while (read_var(&philo->philo_info->control, &philo->philo_info->mutex_control) && philo->n_eat < philo->philo_info->num_meals)
 	{
-		if (read_control(philo))
+		if (read_var(&philo->philo_info->control, &philo->philo_info->mutex_control))
 			eat(philo);
-		if (!read_control(philo))
+		if (!read_var(&philo->philo_info->control, &philo->philo_info->mutex_control))
 			break ;
-		if (read_control(philo))
+		if (read_var(&philo->philo_info->control, &philo->philo_info->mutex_control))
 			doze_off(philo);
-		if (!read_control(philo))
+		if (!read_var(&philo->philo_info->control, &philo->philo_info->mutex_control))
 			break ;
 		think(philo);
 	}

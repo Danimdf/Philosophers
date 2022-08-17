@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 21:13:52 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/08/16 21:14:44 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/08/16 21:30:00 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,10 @@ void		*ft_memset(void *b, int c, size_t n);
 void		*ft_calloc(size_t nmemb, size_t size);
 long int	get_t_stamp(void);
 long int	get_current_time(long int ts_baseline);
-int			read_control(t_philo *philo);
+// int			read_control(t_philo *philo);
+int			read_var(int *var, pthread_mutex_t *mutex);
 void		write_control(t_philo *philo, int status);
-int			read_first_to_die(t_philo *philo);
+// int			read_first_to_die(t_philo *philo);
 void		write_first_to_die(t_philo *philo, int value);
 void		create_threads(t_philo_info *info);
 void		join_threads(t_philo_info *info);
