@@ -6,7 +6,7 @@
 /*   By: Dmonteir < dmonteir@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 21:13:52 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/08/18 00:40:42 by Dmonteir         ###   ########.fr       */
+/*   Updated: 2022/08/18 01:11:23 by Dmonteir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void		create_threads(t_philo_info *info);
 void		join_threads(t_philo_info *info);
 void		philo_die_in_lunch(t_philo *philo);
 void		release_forks(t_philo *philo);
+void		check_forks(t_philo *philo, int flag);
 
 //init
 void		init_all(t_philo_info *info);

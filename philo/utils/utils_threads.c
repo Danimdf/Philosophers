@@ -6,7 +6,7 @@
 /*   By: Dmonteir < dmonteir@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 21:16:01 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/08/18 00:40:04 by Dmonteir         ###   ########.fr       */
+/*   Updated: 2022/08/18 01:34:03 by Dmonteir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ void	philo_die_in_lunch(t_philo *philo)
 	if (philo->philo_info->ms_to_eat > philo->philo_info->ms_to_die)
 	{
 		usleep(philo->philo_info->ms_to_die * 1000);
-		write_var(&philo->philo_info->control, &philo->philo_info->mutex_control, FALSE);
+		write_var(&philo->philo_info->control,
+			&philo->philo_info->mutex_control, FALSE);
 		print_action(philo, DIE);
 		release_forks(philo);
 		return ;
@@ -53,4 +54,19 @@ void	release_forks(t_philo *philo)
 {
 	pthread_mutex_unlock(philo->first_fork);
 	pthread_mutex_unlock(philo->second_fork);
+}
+
+void	check_forks(t_philo *philo, int flag)
+{
+	if (!is_alive(philo) || !read_var(&philo->philo_info->control,
+			&philo->philo_info->mutex_control))
+	{
+		write_var(&philo->philo_info->control,
+			&philo->philo_info->mutex_control, FALSE);
+		if (flag == 0)
+			pthread_mutex_unlock(philo->first_fork);
+		else
+			release_forks(philo);
+		return ;
+	}
 }
