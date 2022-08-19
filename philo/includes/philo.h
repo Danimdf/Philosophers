@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Dmonteir < dmonteir@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: jfrancis <jfrancis@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 21:13:52 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/08/18 01:11:23 by Dmonteir         ###   ########.fr       */
+/*   Updated: 2022/08/17 21:09:49 by jfrancis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct s_philo_info
 	int					control;
 	int					first_to_die;
 	int					num_philos;
-	int					ms_to_die;
+	long int			ms_to_die;
 	int					ms_to_eat;
 	int					ms_to_sleep;
 	int					num_meals;
