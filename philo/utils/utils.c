@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 20:01:53 by jfrancis          #+#    #+#             */
-/*   Updated: 2022/08/16 21:18:19 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/08/19 19:58:38 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ long int	get_t_stamp(void)
 	long int		ms;
 
 	gettimeofday(&tv, NULL);
-	ms = tv.tv_sec * 1000 + tv.tv_usec / 1000;
+	ms = (tv.tv_sec * 1000000 + tv.tv_usec) / 1000;
 	return (ms);
 }
 

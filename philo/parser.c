@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 00:45:39 by Dmonteir          #+#    #+#             */
-/*   Updated: 2022/08/16 21:04:18 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/08/19 19:57:01 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	parse_args(t_philo_info *info, int argc, char **argv)
 {
 	info->num_philos = ft_atoi(argv[1]);
-	info->ms_to_die = ft_atoi(argv[2]);
+	info->ms_to_die = ft_atol(argv[2]);
 	info->ms_to_eat = ft_atoi(argv[3]);
 	info->ms_to_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
