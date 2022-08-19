@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_actions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Dmonteir < dmonteir@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: jfrancis <jfrancis@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 21:08:49 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/08/18 01:27:05 by Dmonteir         ###   ########.fr       */
+/*   Updated: 2022/08/17 21:39:09 by jfrancis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,21 @@ static void	eat(t_philo *philo)
 	flag = 0;
 	pthread_mutex_lock(philo->first_fork);
 	check_forks(philo, flag);
+	pthread_mutex_unlock(philo->first_fork);
 	print_action(philo, FORK);
-	flag = 1;
 	pthread_mutex_lock(philo->second_fork);
+	flag = 1;
 	check_forks(philo, flag);
+	pthread_mutex_unlock(philo->first_fork);
+	pthread_mutex_unlock(philo->second_fork);
 	print_action(philo, FORK);
 	philo->last_meal = get_t_stamp();
 	print_action(philo, EAT);
 	philo_die_in_lunch(philo);
 	usleep(philo->philo_info->ms_to_eat * 1000);
 	philo->n_eat++;
-	release_forks(philo);
+	pthread_mutex_unlock(philo->first_fork);
+	pthread_mutex_unlock(philo->second_fork);
 	return ;
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_actions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Dmonteir < dmonteir@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: jfrancis <jfrancis@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 21:17:27 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/08/18 01:33:05 by Dmonteir         ###   ########.fr       */
+/*   Updated: 2022/08/17 21:17:10 by jfrancis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ int	is_alive(t_philo *philo)
 
 int	has_enough_time(t_philo *philo, int action)
 {
-	if ((philo->philo_info->ms_to_die - get_current_time(philo->last_meal))
+	long int in_ms;
+
+	in_ms = get_current_time(philo->last_meal);
+	if ((philo->philo_info->ms_to_die - in_ms)
 		> action)
 		return (TRUE);
 	else

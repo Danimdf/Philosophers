@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_threads.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Dmonteir < dmonteir@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: jfrancis <jfrancis@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 21:16:01 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/08/18 01:34:03 by Dmonteir         ###   ########.fr       */
+/*   Updated: 2022/08/17 21:35:58 by jfrancis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,12 @@ void	release_forks(t_philo *philo)
 
 void	check_forks(t_philo *philo, int flag)
 {
+	flag = flag + 1;
 	if (!is_alive(philo) || !read_var(&philo->philo_info->control,
 			&philo->philo_info->mutex_control))
 	{
 		write_var(&philo->philo_info->control,
 			&philo->philo_info->mutex_control, FALSE);
-		if (flag == 0)
-			pthread_mutex_unlock(philo->first_fork);
-		else
-			release_forks(philo);
 		return ;
 	}
 }
