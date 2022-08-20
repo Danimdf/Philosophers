@@ -22,7 +22,7 @@ OBJ_DIR	= ./obj
 
 RM		= rm -rf
 
-VPATH	= includes utils
+VPATH	= includes utils main_program
 
 $(OBJ_DIR)/%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
