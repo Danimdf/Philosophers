@@ -6,7 +6,7 @@
 /*   By: Dmonteir < dmonteir@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 21:08:49 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/08/20 17:36:11 by Dmonteir         ###   ########.fr       */
+/*   Updated: 2022/08/20 18:20:04 by Dmonteir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	think(t_philo *philo)
 {
 	print_action(philo, THINK);
-	//usleep(50);
+	usleep(50);
 	return ;
 }
 
