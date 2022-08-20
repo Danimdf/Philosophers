@@ -6,7 +6,7 @@
 /*   By: Dmonteir < dmonteir@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 00:31:24 by Dmonteir          #+#    #+#             */
-/*   Updated: 2022/08/20 18:04:06 by Dmonteir         ###   ########.fr       */
+/*   Updated: 2022/08/20 21:29:48 by Dmonteir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	main(int argc, char **argv)
 	while (1)
 	{
 		i = (i + 1) % info.num_philos;
+		
 		if (info.num_meals != MAX_INT)
 		{
 			if (all_philos_ate_enough(&info))
@@ -55,7 +56,7 @@ int	main(int argc, char **argv)
 			print_action(&(info.philo)[i], DIE);
 			break ;
 		}
-		usleep(200);
+		usleep(450);
 	}
 	join_threads(&info);
 	free_all(&info);

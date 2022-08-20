@@ -6,7 +6,7 @@
 /*   By: Dmonteir < dmonteir@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 21:08:49 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/08/20 18:20:04 by Dmonteir         ###   ########.fr       */
+/*   Updated: 2022/08/20 21:50:16 by Dmonteir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	*actions(void *args)
 		return (one_philo(philo));
 	while (philo->n_eat < philo->philo_info->num_meals && !read_var(&philo->philo_info->first_to_die, &philo->philo_info->mutex_first_to_die))
 	{
+		usleep(50);
 		eat(philo);
 		doze_off(philo);
 		think(philo);
