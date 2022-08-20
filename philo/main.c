@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: Dmonteir < dmonteir@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 00:31:24 by Dmonteir          #+#    #+#             */
-/*   Updated: 2022/08/20 02:42:52 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/08/20 17:38:25 by Dmonteir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	main(int argc, char **argv)
 			if (all_philos_ate_enough(&info))
 				break ;
 		}
-		usleep(300);
+		usleep(200);
 	}
 	join_threads(&info);
 	free_all(&info);
