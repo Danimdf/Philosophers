@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 20:27:13 by jfrancis          #+#    #+#             */
-/*   Updated: 2022/08/16 21:13:12 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/08/19 20:51:04 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	init_forks(t_philo_info *info)
 		pthread_mutex_init(&(info->philo)[i].fork, NULL);
 		(info->philo)[i].neighbours_fork = &((info->philo)[(i + 1)
 				% info->num_philos].fork);
+		pthread_mutex_init(&(info->philo)[i].mutex_last_meal, NULL);
 		if ((info->philo)[i].id % 2)
 		{
 			(info->philo)[i].first_fork = (info->philo)[i].neighbours_fork;
@@ -58,8 +59,8 @@ void	init_forks(t_philo_info *info)
 
 void	init_all(t_philo_info *info)
 {
-	info->control = 1;
-	info->first_to_die = 0;
+	info->control = TRUE;
+	info->first_to_die = FALSE;
 	init_philo(info);
 	init_forks(info);
 }
