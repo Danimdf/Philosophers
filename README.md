@@ -4,7 +4,7 @@ Eat, Sleep, Spaghetti, repeat. This project is about learning how threads work b
 
 
         
-# Usage
+# Usage :spaghetti:
 
 - Clone the project in your environment
 ~~~shell
