@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   philo_actions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Dmonteir < dmonteir@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: jfrancis <jfrancis@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 21:08:49 by roaraujo          #+#    #+#             */
 /*   Updated: 2022/08/20 21:54:08 by Dmonteir         ###   ########.fr       */
@@ -28,6 +28,9 @@ static void	doze_off(t_philo *philo)
 
 static void	eat(t_philo *philo)
 {
+	int	flag;
+
+	flag = 0;
 	pthread_mutex_lock(philo->first_fork);
 	print_action(philo, FORK);
 	pthread_mutex_lock(philo->second_fork);

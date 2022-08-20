@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   utils_actions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Dmonteir < dmonteir@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: jfrancis <jfrancis@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 21:17:27 by roaraujo          #+#    #+#             */
 /*   Updated: 2022/08/20 22:04:04 by Dmonteir         ###   ########.fr       */
@@ -22,7 +22,10 @@ int	is_alive(t_philo *philo)
 
 int	has_enough_time(t_philo *philo, int action)
 {
-	if ((philo->philo_info->ms_to_die - get_current_time(philo->last_meal))
+	long int in_ms;
+
+	in_ms = get_current_time(philo->last_meal);
+	if ((philo->philo_info->ms_to_die - in_ms)
 		> action)
 		return (TRUE);
 	else
@@ -32,7 +35,7 @@ int	has_enough_time(t_philo *philo, int action)
 void	print_action(t_philo *p, char *action)
 {
 	long int	t;
-
+ 
 	pthread_mutex_lock(&p->philo_info->print_out);
 	t = get_current_time(p->pgm_start);
 	if (ft_strcmp(action, FORK) == 0

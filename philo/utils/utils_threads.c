@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   utils_threads.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Dmonteir < dmonteir@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: jfrancis <jfrancis@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 21:16:01 by roaraujo          #+#    #+#             */
 /*   Updated: 2022/08/20 17:24:49 by Dmonteir         ###   ########.fr       */

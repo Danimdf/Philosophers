@@ -89,6 +89,7 @@ void		create_threads(t_philo_info *info);
 void		join_threads(t_philo_info *info);
 void		philo_die_in_lunch(t_philo *philo);
 void		release_forks(t_philo *philo);
+void		check_forks(t_philo *philo, int flag);
 
 //init
 void		init_all(t_philo_info *info);
