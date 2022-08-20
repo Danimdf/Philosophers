@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jfrancis <jfrancis@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 21:13:52 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/08/17 21:09:49 by jfrancis         ###   ########.fr       */
+/*   Updated: 2022/08/19 20:44:06 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,13 @@ typedef struct s_philo
 	pthread_mutex_t	*neighbours_fork;
 	pthread_mutex_t	*first_fork;
 	pthread_mutex_t	*second_fork;
+	pthread_mutex_t	mutex_last_meal;
 }	t_philo;
 
 typedef struct s_philo_info
 {
-	int					control;
-	int					first_to_die;
+	long int			control;
+	long int			first_to_die;
 	int					num_philos;
 	long int			ms_to_die;
 	int					ms_to_eat;
@@ -82,8 +83,8 @@ void		*ft_memset(void *b, int c, size_t n);
 void		*ft_calloc(size_t nmemb, size_t size);
 long int	get_t_stamp(void);
 long int	get_current_time(long int ts_baseline);
-int			read_var(int *var, pthread_mutex_t *mutex);
-void		write_var(int *var, pthread_mutex_t *mutex, int status);
+long int	read_var(long int *var, pthread_mutex_t *mutex);
+void		write_var(long int *var, pthread_mutex_t *mutex, long int status);
 void		create_threads(t_philo_info *info);
 void		join_threads(t_philo_info *info);
 void		philo_die_in_lunch(t_philo *philo);

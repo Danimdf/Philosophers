@@ -6,15 +6,15 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 21:16:59 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/08/16 21:39:54 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/08/19 20:38:30 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	read_var(int *var, pthread_mutex_t *mutex)
+long int	read_var(long int *var, pthread_mutex_t *mutex)
 {
-	int	temp;
+	long int	temp;
 
 	pthread_mutex_lock(mutex);
 	temp = *var;
@@ -22,7 +22,7 @@ int	read_var(int *var, pthread_mutex_t *mutex)
 	return (temp);
 }
 
-void	write_var(int *var, pthread_mutex_t *mutex, int status)
+void	write_var(long int *var, pthread_mutex_t *mutex, long int status)
 {
 	pthread_mutex_lock(mutex);
 	*var = status;

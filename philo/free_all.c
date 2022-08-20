@@ -6,7 +6,7 @@
 /*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 21:13:34 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/08/16 21:13:35 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/08/19 20:44:35 by roaraujo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ void	free_all(t_philo_info *info)
 
 	i = -1;
 	while (++i < info->num_philos)
+	{
 		pthread_mutex_destroy(&((info->philo)[i].fork));
+		pthread_mutex_destroy(&(info->philo)[i].mutex_last_meal);
+	}
 	pthread_mutex_destroy(&(info->mutex_control));
 	pthread_mutex_destroy(&(info->mutex_first_to_die));
 	pthread_mutex_destroy(&(info->print_out));

@@ -6,7 +6,7 @@
 /*   By: jfrancis <jfrancis@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 21:17:27 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/08/17 21:17:10 by jfrancis         ###   ########.fr       */
+/*   Updated: 2022/08/20 22:04:04 by Dmonteir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,31 +32,31 @@ int	has_enough_time(t_philo *philo, int action)
 		return (FALSE);
 }
 
-void	print_action(t_philo *philo, char *action)
+void	print_action(t_philo *p, char *action)
 {
 	long int	t;
-
-	pthread_mutex_lock(&philo->philo_info->print_out);
-	t = get_current_time(philo->pgm_start);
-	if (ft_strcmp(action, FORK) == 0 && read_var(&philo->philo_info->control,
-			&philo->philo_info->mutex_control))
-		printf("%s%ld %i %s%s\n", YEL, t, philo->id, FORK, RESET);
-	if (ft_strcmp(action, EAT) == 0 && read_var(&philo->philo_info->control,
-			&philo->philo_info->mutex_control))
-		printf("%s%ld %i %s%s\n", GRN, t, philo->id, EAT, RESET);
-	if (ft_strcmp(action, THINK) == 0 && read_var(&philo->philo_info->control,
-			&philo->philo_info->mutex_control))
-		printf("%s%ld %i %s%s\n", CYN, t, philo->id, THINK, RESET);
-	if (ft_strcmp(action, SLEEP) == 0 && read_var(&philo->philo_info->control,
-			&philo->philo_info->mutex_control))
-		printf("%s%ld %i %s%s\n", BLU, t, philo->id, SLEEP, RESET);
+ 
+	pthread_mutex_lock(&p->philo_info->print_out);
+	t = get_current_time(p->pgm_start);
+	if (ft_strcmp(action, FORK) == 0
+		&& read_var(&p->philo_info->control, &p->philo_info->mutex_control))
+		printf("%s%ld %i %s%s\n", YEL, t, p->id, FORK, RESET);
+	if (ft_strcmp(action, EAT) == 0
+		&& read_var(&p->philo_info->control, &p->philo_info->mutex_control))
+		printf("%s%ld %i %s%s\n", GRN, t, p->id, EAT, RESET);
+	if (ft_strcmp(action, THINK) == 0
+		&& read_var(&p->philo_info->control, &p->philo_info->mutex_control))
+		printf("%s%ld %i %s%s\n", CYN, t, p->id, THINK, RESET);
+	if (ft_strcmp(action, SLEEP) == 0
+		&& read_var(&p->philo_info->control, &p->philo_info->mutex_control))
+		printf("%s%ld %i %s%s\n", BLU, t, p->id, SLEEP, RESET);
 	if (ft_strcmp(action, DIE) == 0
-		&& read_var(&philo->philo_info->first_to_die,
-			&philo->philo_info->mutex_first_to_die) == 0)
+		&& read_var(&p->philo_info->first_to_die,
+			&p->philo_info->mutex_first_to_die) == 0)
 	{
-		write_var(&philo->philo_info->first_to_die,
-			&philo->philo_info->mutex_first_to_die, 1);
-		printf("%s%ld %i %s%s\n", RED, t, philo->id, DIE, RESET);
+		write_var(&p->philo_info->first_to_die,
+			&p->philo_info->mutex_first_to_die, 1);
+		printf("%s%ld %i %s%s\n", RED, t, p->id, DIE, RESET);
 	}
-	pthread_mutex_unlock(&philo->philo_info->print_out);
+	pthread_mutex_unlock(&p->philo_info->print_out);
 }
