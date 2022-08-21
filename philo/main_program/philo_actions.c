@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_actions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jfrancis <jfrancis@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: Dmonteir < dmonteir@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 21:08:49 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/08/20 21:54:08 by Dmonteir         ###   ########.fr       */
+/*   Updated: 2022/08/21 22:45:11 by Dmonteir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,6 @@ static void	doze_off(t_philo *philo)
 
 static void	eat(t_philo *philo)
 {
-	int	flag;
-
-	flag = 0;
 	pthread_mutex_lock(philo->first_fork);
 	print_action(philo, FORK);
 	pthread_mutex_lock(philo->second_fork);
@@ -38,7 +35,8 @@ static void	eat(t_philo *philo)
 	write_var(&philo->last_meal, &philo->mutex_last_meal, get_t_stamp());
 	print_action(philo, EAT);
 	usleep(philo->philo_info->ms_to_eat * 1000);
-	philo->n_eat++;
+	write_var(&philo->n_eat, &philo->mutex_n_eat,
+		read_var(&philo->n_eat, &philo->mutex_n_eat) + 1);
 	pthread_mutex_unlock(philo->first_fork);
 	pthread_mutex_unlock(philo->second_fork);
 	return ;

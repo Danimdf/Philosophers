@@ -47,9 +47,6 @@ fclean:	clean
 
 re:		fclean all
 
-val:
-	valgrind --suppressions=readline.supp -s --show-leak-kinds=all --leak-check=full --track-fds=yes ./minishell
-
 gdb:	obj_dir $(OBJ)
 		$(CC) $(CFLAGS) $(OBJ) -o a.out
 

@@ -6,7 +6,7 @@
 /*   By: Dmonteir < dmonteir@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 00:31:24 by Dmonteir          #+#    #+#             */
-/*   Updated: 2022/08/20 22:04:46 by Dmonteir         ###   ########.fr       */
+/*   Updated: 2022/08/21 22:45:51 by Dmonteir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ int	all_philos_ate_enough(t_philo_info *info)
 	full_philos = 0;
 	while (++i < info->num_philos)
 	{
-		if ((info->philo)[i].n_eat >= info->num_meals)
+		if (read_var(&(info->philo)[i].n_eat,
+			&(info->philo)[i].mutex_n_eat) >= info->num_meals)
 			full_philos++;
 	}
 	if (full_philos == info->num_philos)
@@ -60,9 +61,10 @@ static void	observer(t_philo_info *info)
 			if (all_philos_ate_enough(info))
 				break ;
 		}
-		if ((info->philo)[i].n_eat < info->num_meals
-			&& get_current_time(read_var(&(info->philo)[i].last_meal,
-				&(info->philo)[i].mutex_last_meal)) > info->ms_to_die)
+		if (read_var(&(info->philo)[i].n_eat,
+			&(info->philo)[i].mutex_n_eat) < info->num_meals
+				&& get_current_time(read_var(&(info->philo)[i].last_meal,
+					&(info->philo)[i].mutex_last_meal)) > info->ms_to_die)
 		{
 			write_var(&info->control, &info->mutex_control, FALSE);
 			print_action(&(info->philo)[i], DIE);

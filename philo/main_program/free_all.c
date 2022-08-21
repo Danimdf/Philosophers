@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: Dmonteir < dmonteir@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 21:13:34 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/08/19 20:44:35 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/08/21 22:10:12 by Dmonteir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	free_all(t_philo_info *info)
 	{
 		pthread_mutex_destroy(&((info->philo)[i].fork));
 		pthread_mutex_destroy(&(info->philo)[i].mutex_last_meal);
+		pthread_mutex_destroy(&(info->philo)[i].mutex_n_eat);
 	}
 	pthread_mutex_destroy(&(info->mutex_control));
 	pthread_mutex_destroy(&(info->mutex_first_to_die));

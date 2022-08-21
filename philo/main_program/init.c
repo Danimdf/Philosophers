@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: Dmonteir < dmonteir@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 20:27:13 by jfrancis          #+#    #+#             */
-/*   Updated: 2022/08/19 20:51:04 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/08/21 22:10:19 by Dmonteir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	init_forks(t_philo_info *info)
 		(info->philo)[i].neighbours_fork = &((info->philo)[(i + 1)
 				% info->num_philos].fork);
 		pthread_mutex_init(&(info->philo)[i].mutex_last_meal, NULL);
+		pthread_mutex_init(&(info->philo)[i].mutex_n_eat, NULL);
 		if ((info->philo)[i].id % 2)
 		{
 			(info->philo)[i].first_fork = (info->philo)[i].neighbours_fork;

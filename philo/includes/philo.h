@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roaraujo <roaraujo@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: Dmonteir < dmonteir@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 21:13:52 by roaraujo          #+#    #+#             */
-/*   Updated: 2022/08/19 20:44:06 by roaraujo         ###   ########.fr       */
+/*   Updated: 2022/08/21 22:15:40 by Dmonteir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_philo_info	t_philo_info;
 typedef struct s_philo
 {
 	int				id;
-	int				n_eat;
+	long int		n_eat;
 	long int		last_meal;
 	t_philo_info	*philo_info;
 	pthread_t		thread;
@@ -44,6 +44,7 @@ typedef struct s_philo
 	pthread_mutex_t	*first_fork;
 	pthread_mutex_t	*second_fork;
 	pthread_mutex_t	mutex_last_meal;
+	pthread_mutex_t	mutex_n_eat;
 }	t_philo;
 
 typedef struct s_philo_info
